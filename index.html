@@ -75,7 +75,7 @@
     </table>
 
     <script>
-        const choices = ["rock", "scissors", "paper"];
+        const choices = ["Камень", "Ножницы", "Бумага"];
         let playerWins = 0;
         let computerWins = 0;
 
@@ -99,9 +99,9 @@
 
         function getResult(player, computer) {
             if (player === computer) return "Ничья!";
-            if ((player === "rock" && computer === "scissors") ||
-                (player === "scissors" && computer === "paper") ||
-                (player === "paper" && computer === "rock")) {
+            if ((player === "Камень" && computer === "Ножницы") ||
+                (player === "Ножницы" && computer === "Бумага") ||
+                (player === "Бумага" && computer === "Камень")) {
                 return "Вы выиграли!";
             } else {
                 return "Компьютер выиграл!";
