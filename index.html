@@ -8,11 +8,12 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #333;
-            color: #fff;
+            background-color: #2c3e50; /* Темный фон */
+            color: #ecf0f1; /* Белый текст */
+            padding: 20px;
         }
         h1 {
-            color: #ff6600;
+            color: #e74c3c; /* Красный заголовок */
         }
         .choices {
             display: flex;
@@ -23,32 +24,17 @@
             margin: 0 10px;
             cursor: pointer;
             padding: 10px 20px;
-            border: 2px solid #ff6600;
+            border: 2px solid #3498db; /* Синяя рамка */
             border-radius: 5px;
             transition: background-color 0.3s ease;
+            color: #ecf0f1; /* Белый текст на кнопках */
         }
         .choice:hover {
-            background-color: #ff6600;
-            color: #333;
+            background-color: #3498db; /* Синий фон при наведении */
         }
         #result {
             font-weight: bold;
             margin-top: 20px;
-        }
-        table {
-            margin: 20px auto;
-            border-collapse: collapse;
-            width: 50%;
-        }
-        th, td {
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background-color: #ff6600;
-        }
-        tr:nth-child(even) {
-            background-color: #444;
         }
     </style>
 </head>
@@ -56,28 +42,14 @@
     <h1>Камень, ножницы, бумага</h1>
     <p>Выберите один из вариантов:</p>
     <div class="choices">
-        <div class="choice" id="rock">Камень</div>
-        <div class="choice" id="scissors">Ножницы</div>
-        <div class="choice" id="paper">Бумага</div>
+        <div class="choice" id="камень">Камень</div>
+        <div class="choice" id="ножницы">Ножницы</div>
+        <div class="choice" id="бумага">Бумага</div>
     </div>
     <div id="result"></div>
-    
-    <table>
-        <thead>
-            <tr>
-                <th>Игрок</th>
-                <th>Компьютер</th>
-                <th>Результат</th>
-            </tr>
-        </thead>
-        <tbody id="resultsTable">
-        </tbody>
-    </table>
 
     <script>
-        const choices = ["Камень", "Ножницы", "Бумага"];
-        let playerWins = 0;
-        let computerWins = 0;
+        const choices = ["камень", "ножницы", "бумага"];
 
         document.querySelectorAll(".choice").forEach(choice => {
             choice.addEventListener("click", () => {
@@ -86,51 +58,18 @@
                 const result = getResult(playerChoice, computerChoice);
 
                 document.getElementById("result").innerHTML = `Вы выбрали ${playerChoice}, компьютер выбрал ${computerChoice}. Результат: ${result}`;
-
-                if (result === "Вы выиграли!") {
-                    playerWins++;
-                } else if (result === "Компьютер выиграл!") {
-                    computerWins++;
-                }
-
-                updateResultsTable(playerChoice, computerChoice, result);
             });
         });
 
         function getResult(player, computer) {
             if (player === computer) return "Ничья!";
-            if ((player === "Камень" && computer === "Ножницы") ||
-                (player === "Ножницы" && computer === "Бумага") ||
-                (player === "Бумага" && computer === "Камень")) {
+            if ((player === "камень" && computer === "ножницы") ||
+                (player === "ножницы" && computer === "бумага") ||
+                (player === "бумага" && computer === "камень")) {
                 return "Вы выиграли!";
             } else {
                 return "Компьютер выиграл!";
             }
-        }
-
-        function updateResultsTable(playerChoice, computerChoice, result) {
-            const table = document.getElementById("resultsTable");
-            const row = table.insertRow(1);
-            const playerCell = row.insertCell(0);
-            const computerCell = row.insertCell(1);
-            const resultCell = row.insertCell(2);
-            
-            playerCell.innerHTML = playerChoice;
-            computerCell.innerHTML = computerChoice;
-            resultCell.innerHTML = result;
-
-            if (result === "Вы выиграли!") {
-                playerCell.style.color = "#00ff00";
-                computerCell.style.color = "#ff0000";
-                resultCell.style.color = "#00ff00";
-            } else if (result === "Компьютер выиграл!") {
-                playerCell.style.color = "#ff0000";
-                computerCell.style.color = "#00ff00";
-                resultCell.style.color = "#ff0000";
-            }
-
-            document.getElementById("playerWins").innerText = `Победы игрока: ${playerWins}`;
-            document.getElementById("computerWins").innerText = `Победы компьютера: ${computerWins}`;
         }
     </script>
 </body>
